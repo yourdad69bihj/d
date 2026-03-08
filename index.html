@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>VULCAN | HACK CONSOLE</title>
+    <style>
+        :root { --neon: #00f2ea; --bg: #0b0c10; --panel: rgba(15, 15, 15, 0.95); }
+        body { margin: 0; background: var(--bg); color: white; font-family: 'Courier New', monospace; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        
+        #console { width: 90%; height: 300px; background: #000; border: 1px solid var(--neon); padding: 10px; font-size: 10px; overflow-y: scroll; margin-bottom: 20px; box-shadow: 0 0 15px rgba(0, 242, 234, 0.2); }
+        .log-entry { margin-bottom: 5px; border-left: 2px solid var(--neon); padding-left: 5px; }
+        
+        .inject-btn { background: #000; border: 1px solid var(--neon); color: var(--neon); padding: 15px 30px; font-weight: bold; cursor: pointer; text-transform: uppercase; box-shadow: 0 0 10px var(--neon); }
+        .inject-btn:active { transform: scale(0.95); background: var(--neon); color: #000; }
+    </style>
+</head>
+<body>
+
+    <div style="font-size: 14px; margin-bottom: 10px; color: var(--neon);">VULCAN SYSTEM INJECTOR v3.2</div>
+    
+    <div id="console">
+        <div class="log-entry">> Initializing Vulcan Core...</div>
+        <div class="log-entry">> Security Key Verified: key67</div>
+        <div class="log-entry">> Target: Block Blast (com.vulcan.blockblast)</div>
+        <div class="log-entry">> Ready for Injection.</div>
+    </div>
+
+    <button class="inject-btn" onclick="runHack()">INJECT 1,000,000</button>
+
+    <script>
+        const KEY = "key67"; // [cite: 2026-01-11]
+        const consoleEl = document.getElementById('console');
+
+        function addLog(msg) {
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.innerText = `> ${msg}`;
+            consoleEl.appendChild(entry);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        async function runHack() {
+            addLog("SEARCHING FOR SAVE_DATA...");
+            await new Promise(r => setTimeout(r, 1000));
+            addLog("BYPASSING ENCRYPTION...");
+            await new Promise(r => setTimeout(r, 1500));
+            
+            // The actual hack: Writing to local storage
+            localStorage.setItem('v_blast_save', JSON.stringify({s: 1000000, k: KEY}));
+            localStorage.setItem('vulcan_hacked', 'true');
+            
+            addLog("SUCCESS: 1,000,000 SCORE INJECTED.");
+            alert("HACK SUCCESSFUL. RESTART BLOCK BLAST.");
+        }
+    </script>
+</body>
+</html>
